@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import { img } from "@/lib/data";
+import { img } from "@/lib/store/seed-data";
 import { site } from "@/lib/site";
 import { IconArrow, IconCheck, IconBolt, IconShield, IconHeadset } from "@/components/icons";
 

@@ -93,6 +93,13 @@ export const IconStar = (p) => (
   </svg>
 );
 
+export const IconUser = (p) => (
+  <svg viewBox="0 0 24 24" width="20" height="20" {...base} {...p}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+  </svg>
+);
+
 export const IconTrash = (p) => (
   <svg viewBox="0 0 24 24" width="18" height="18" {...base} {...p}>
     <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" />

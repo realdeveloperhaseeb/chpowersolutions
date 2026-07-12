@@ -5,8 +5,9 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
-import { site } from "@/lib/site";
-import { IconCart, IconMenu, IconClose, IconBolt } from "@/components/icons";
+import Logo from "@/components/Logo";
+import AccountMenu from "@/components/AccountMenu";
+import { IconCart, IconMenu, IconClose } from "@/components/icons";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -27,11 +28,9 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="container-x flex h-16 items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 text-white shadow-soft">
-            <IconBolt />
-          </span>
-          <span className="text-lg font-extrabold tracking-tight text-slate-900">
+        <Link href="/" className="flex items-center gap-2.5">
+          <Logo size={40} />
+          <span className="hidden text-lg font-extrabold tracking-tight text-slate-900 sm:inline">
             CH <span className="text-brand-600">Power</span>
           </span>
         </Link>
@@ -51,7 +50,8 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <AccountMenu />
           <Link
             href="/cart"
             className="relative grid h-10 w-10 place-items-center rounded-full text-slate-700 transition-colors hover:bg-slate-100 hover:text-brand-600"

@@ -1,18 +1,17 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { getCategories } from "@/lib/data";
-import { IconBolt, IconMail, IconPhone, IconPin } from "@/components/icons";
+import { getCategories } from "@/lib/store";
+import Logo from "@/components/Logo";
+import { IconMail, IconPhone, IconPin } from "@/components/icons";
 
-export default function Footer() {
-  const categories = getCategories();
+export default async function Footer() {
+  const categories = await getCategories();
   return (
     <footer className="mt-24 border-t border-slate-100 bg-slate-50">
       <div className="container-x grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 text-white">
-              <IconBolt />
-            </span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <Logo size={40} />
             <span className="text-lg font-extrabold tracking-tight text-slate-900">
               CH <span className="text-brand-600">Power</span>
             </span>

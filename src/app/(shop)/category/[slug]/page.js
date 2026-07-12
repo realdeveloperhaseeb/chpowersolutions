@@ -2,17 +2,14 @@ import { notFound } from "next/navigation";
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
 import {
-  getCategories,
   getCategoryBySlug,
   getProductsByCategory,
-} from "@/lib/data";
+} from "@/lib/store";
 
-export function generateStaticParams() {
-  return getCategories().map((c) => ({ slug: c.slug }));
-}
+export const dynamic = "force-dynamic";
 
-export function generateMetadata({ params }) {
-  const cat = getCategoryBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const cat = await getCategoryBySlug(params.slug);
   if (!cat) return {};
   return {
     title: cat.metaTitle,
@@ -21,11 +18,11 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function CategoryPage({ params }) {
-  const cat = getCategoryBySlug(params.slug);
+export default async function CategoryPage({ params }) {
+  const cat = await getCategoryBySlug(params.slug);
   if (!cat) notFound();
 
-  const products = getProductsByCategory(cat.slug);
+  const products = await getProductsByCategory(cat.slug);
 
   return (
     <>

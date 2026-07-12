@@ -7,21 +7,22 @@ module.exports = {
         sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
       },
       colors: {
+        // Brand red — sampled from the CH Power Solutions logo.
         brand: {
-          50: "#eff6ff",
-          100: "#dbeafe",
-          200: "#bfdbfe",
-          300: "#93c5fd",
-          400: "#60a5fa",
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1d4ed8",
-          800: "#1e40af",
-          900: "#1e3a8a",
+          50: "#fef2f2",
+          100: "#fee2e2",
+          200: "#fecaca",
+          300: "#fca5a5",
+          400: "#f87171",
+          500: "#ef4444",
+          600: "#e11d22",
+          700: "#c1121a",
+          800: "#9f1218",
+          900: "#821418",
         },
       },
       boxShadow: {
-        soft: "0 4px 24px -8px rgba(37, 99, 235, 0.15)",
+        soft: "0 4px 24px -8px rgba(225, 29, 34, 0.20)",
         card: "0 8px 30px -12px rgba(15, 23, 42, 0.12)",
       },
       keyframes: {

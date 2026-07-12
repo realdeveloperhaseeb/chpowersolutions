@@ -3,8 +3,10 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
-import { getCategories, getFeaturedProducts } from "@/lib/data";
+import { getCategories, getFeaturedProducts } from "@/lib/store";
 import { site } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 import {
   IconArrow,
   IconBolt,
@@ -32,9 +34,11 @@ export const metadata = {
   description: site.description,
 };
 
-export default function HomePage() {
-  const categories = getCategories();
-  const featured = getFeaturedProducts();
+export default async function HomePage() {
+  const [categories, featured] = await Promise.all([
+    getCategories(),
+    getFeaturedProducts(),
+  ]);
 
   return (
     <>

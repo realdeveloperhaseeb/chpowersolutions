@@ -58,12 +58,12 @@ body {
 
 /* subtle grid / glow backgrounds */
 .bg-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.08) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(225, 29, 34, 0.08) 1px, transparent 0);
   background-size: 28px 28px;
 }
 
 .glow {
-  background: radial-gradient(600px circle at 50% 0%, rgba(37, 99, 235, 0.10), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(225, 29, 34, 0.10), transparent 70%);
 }
 
 /* image shimmer placeholder */
@@ -87,5 +87,5 @@ body {
 }
 
 ::selection {
-  background: rgba(37, 99, 235, 0.15);
+  background: rgba(225, 29, 34, 0.15);
 }

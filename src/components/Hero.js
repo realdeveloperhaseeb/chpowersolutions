@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { IconArrow, IconBolt, IconCheck } from "@/components/icons";
-import { img } from "@/lib/data";
+import { img } from "@/lib/store/seed-data";
 
 const points = ["Up to 98.8% efficiency", "2–3 year warranty", "Nationwide delivery"];
 

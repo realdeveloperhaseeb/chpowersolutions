@@ -1,6 +1,8 @@
 import PageHeader from "@/components/PageHeader";
 import ProductsExplorer from "@/components/ProductsExplorer";
-import { getProducts, getCategories } from "@/lib/data";
+import { getProducts, getCategories } from "@/lib/store";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "All Products — Solar Inverters & Circuits",
@@ -8,9 +10,11 @@ export const metadata = {
     "Browse all solar inverters, hybrid inverters and repair circuits from CH Power Solutions. 6kW to 20kW models with the best prices in Pakistan.",
 };
 
-export default function ProductsPage() {
-  const products = getProducts();
-  const categories = getCategories();
+export default async function ProductsPage() {
+  const [products, categories] = await Promise.all([
+    getProducts(),
+    getCategories(),
+  ]);
 
   return (
     <>

@@ -3,18 +3,15 @@ import ProductDetail from "@/components/ProductDetail";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import {
-  getProducts,
   getProductBySlug,
   getProductsByCategory,
-} from "@/lib/data";
-import { site, formatPrice } from "@/lib/site";
+} from "@/lib/store";
+import { site } from "@/lib/site";
 
-export function generateStaticParams() {
-  return getProducts().map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
-export function generateMetadata({ params }) {
-  const p = getProductBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const p = await getProductBySlug(params.slug);
   if (!p) return {};
   return {
     title: p.metaTitle,
@@ -28,11 +25,11 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function ProductPage({ params }) {
-  const product = getProductBySlug(params.slug);
+export default async function ProductPage({ params }) {
+  const product = await getProductBySlug(params.slug);
   if (!product) notFound();
 
-  const related = getProductsByCategory(product.categorySlug)
+  const related = (await getProductsByCategory(product.categorySlug))
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
 

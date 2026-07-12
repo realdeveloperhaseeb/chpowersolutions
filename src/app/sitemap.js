@@ -1,7 +1,7 @@
 import { site } from "@/lib/site";
-import { getProducts, getCategories } from "@/lib/data";
+import { getProducts, getCategories } from "@/lib/store";
 
-export default function sitemap() {
+export default async function sitemap() {
   const base = site.url;
   const staticRoutes = ["", "/products", "/about", "/contact"].map((r) => ({
     url: `${base}${r}`,
@@ -9,13 +9,15 @@ export default function sitemap() {
     priority: r === "" ? 1 : 0.8,
   }));
 
-  const categoryRoutes = getCategories().map((c) => ({
+  const [cats, prods] = await Promise.all([getCategories(), getProducts()]);
+
+  const categoryRoutes = cats.map((c) => ({
     url: `${base}/category/${c.slug}`,
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
-  const productRoutes = getProducts().map((p) => ({
+  const productRoutes = prods.map((p) => ({
     url: `${base}/products/${p.slug}`,
     changeFrequency: "weekly",
     priority: 0.9,
