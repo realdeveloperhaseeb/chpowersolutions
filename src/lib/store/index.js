@@ -1,57 +1,72 @@
 // Data store facade. Chooses MySQL when DB is configured, else the in-memory
-// adapter (so the site + admin stay fully usable without a database). Every
-// consumer imports from "@/lib/store" and never touches an adapter directly.
+// adapter. Read operations degrade gracefully to the seed dataset if the DB is
+// unreachable, so a transient outage (or a build with no DB) never crashes a page.
 import { isDbConfigured } from "@/lib/db";
 import { adapter as memory } from "./memory";
 
 let mysqlAdapter = null;
-function pick() {
+function active() {
   if (isDbConfigured()) {
-    if (!mysqlAdapter) {
-      // require lazily so mysql2 isn't loaded when running in memory mode
-      mysqlAdapter = require("./mysql").adapter;
-    }
+    if (!mysqlAdapter) mysqlAdapter = require("./mysql").adapter; // lazy: don't load mysql2 in memory mode
     return mysqlAdapter;
   }
   return memory;
 }
 
-export const storeMode = () => pick().name;
+export const storeMode = () => active().name;
+
+// Reads fall back to seed data if the active (MySQL) adapter errors.
+async function read(method, ...args) {
+  const a = active();
+  try {
+    return await a[method](...args);
+  } catch (e) {
+    if (a.name === "mysql") {
+      console.error(`[store] read '${method}' failed (${e.code || e.message}); using seed data.`);
+      return memory[method](...args);
+    }
+    throw e;
+  }
+}
+// Writes require the real store — errors propagate so the admin knows.
+const write = (method, ...args) => active()[method](...args);
+// Auth lookups go straight to the active store (no seed fallback).
+const auth = (method, ...args) => active()[method](...args);
 
 // categories
-export const getCategories = () => pick().getCategories();
-export const getCategoryBySlug = (slug) => pick().getCategoryBySlug(slug);
-export const getCategoryById = (id) => pick().getCategoryById(id);
-export const createCategory = (d) => pick().createCategory(d);
-export const updateCategory = (id, d) => pick().updateCategory(id, d);
-export const deleteCategory = (id) => pick().deleteCategory(id);
+export const getCategories = () => read("getCategories");
+export const getCategoryBySlug = (s) => read("getCategoryBySlug", s);
+export const getCategoryById = (id) => read("getCategoryById", id);
+export const createCategory = (d) => write("createCategory", d);
+export const updateCategory = (id, d) => write("updateCategory", id, d);
+export const deleteCategory = (id) => write("deleteCategory", id);
 
 // products
-export const getProducts = () => pick().getProducts();
-export const getFeaturedProducts = () => pick().getFeaturedProducts();
-export const getProductBySlug = (slug) => pick().getProductBySlug(slug);
-export const getProductById = (id) => pick().getProductById(id);
-export const getProductsByCategory = (slug) => pick().getProductsByCategory(slug);
-export const createProduct = (d) => pick().createProduct(d);
-export const updateProduct = (id, d) => pick().updateProduct(id, d);
-export const deleteProduct = (id) => pick().deleteProduct(id);
+export const getProducts = () => read("getProducts");
+export const getFeaturedProducts = () => read("getFeaturedProducts");
+export const getProductBySlug = (s) => read("getProductBySlug", s);
+export const getProductById = (id) => read("getProductById", id);
+export const getProductsByCategory = (s) => read("getProductsByCategory", s);
+export const createProduct = (d) => write("createProduct", d);
+export const updateProduct = (id, d) => write("updateProduct", id, d);
+export const deleteProduct = (id) => write("deleteProduct", id);
 
 // settings
-export const getSettings = () => pick().getSettings();
-export const updateSettings = (p) => pick().updateSettings(p);
+export const getSettings = () => read("getSettings");
+export const updateSettings = (p) => write("updateSettings", p);
 
 // users
-export const createUser = (d) => pick().createUser(d);
-export const findUserByEmail = (e) => pick().findUserByEmail(e);
-export const findUserById = (id) => pick().findUserById(id);
-export const getUsers = () => pick().getUsers();
-export const updateUserPassword = (id, hash) => pick().updateUserPassword(id, hash);
+export const createUser = (d) => write("createUser", d);
+export const findUserByEmail = (e) => auth("findUserByEmail", e);
+export const findUserById = (id) => auth("findUserById", id);
+export const getUsers = () => read("getUsers");
+export const updateUserPassword = (id, hash) => write("updateUserPassword", id, hash);
 
 // orders
-export const getOrders = () => pick().getOrders();
-export const getOrderById = (id) => pick().getOrderById(id);
-export const createOrder = (d) => pick().createOrder(d);
-export const updateOrderStatus = (id, s) => pick().updateOrderStatus(id, s);
+export const getOrders = () => read("getOrders");
+export const getOrderById = (id) => read("getOrderById", id);
+export const createOrder = (d) => write("createOrder", d);
+export const updateOrderStatus = (id, s) => write("updateOrderStatus", id, s);
 
 // convenience
 export async function getCategoryName(slug) {

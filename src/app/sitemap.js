@@ -1,6 +1,10 @@
 import { site } from "@/lib/site";
 import { getProducts, getCategories } from "@/lib/store";
 
+// Generated at request time so it always reflects current products/categories
+// (and doesn't need the DB at build time).
+export const dynamic = "force-dynamic";
+
 export default async function sitemap() {
   const base = site.url;
   const staticRoutes = ["", "/products", "/about", "/contact"].map((r) => ({
