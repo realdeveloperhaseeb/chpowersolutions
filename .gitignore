@@ -3,6 +3,9 @@
 /.pnp
 .pnp.js
 
+# use npm on the host; ignore local pnpm lockfile
+pnpm-lock.yaml
+
 # next.js
 /.next/
 /out/
