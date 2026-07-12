@@ -1,6 +1,8 @@
 // Seeds the MySQL database with categories, products, settings and an admin user.
-// Usage:  node --env-file=.env db/seed.mjs
+// Usage:  node db/seed.mjs   (run from the project root; reads the .env file)
 // Requires a .env with DB_* vars and the schema already created (db/schema.sql).
+import { readFileSync, existsSync } from "node:fs";
+import { resolve } from "node:path";
 import mysql from "mysql2/promise";
 import bcrypt from "bcryptjs";
 import {
@@ -9,6 +11,30 @@ import {
   seedSettings,
   seedAdmin,
 } from "../src/lib/store/seed-data.js";
+
+// Minimal .env loader (no dependency) — works on any Node version / package manager.
+function loadDotEnv() {
+  const p = resolve(process.cwd(), ".env");
+  if (!existsSync(p)) return;
+  for (const line of readFileSync(p, "utf8").split("\n")) {
+    const m = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (!m) continue;
+    let val = (m[2] || "").trim();
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    }
+    if (!(m[1] in process.env)) process.env[m[1]] = val;
+  }
+}
+loadDotEnv();
+
+if (!process.env.DB_HOST || !process.env.DB_NAME) {
+  console.error("Missing DB_* env vars. Create a .env file in the project root first.");
+  process.exit(1);
+}
 
 const conn = await mysql.createConnection({
   host: process.env.DB_HOST,

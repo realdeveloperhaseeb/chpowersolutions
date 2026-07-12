@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "start:server": "node server.js",
-    "db:seed": "node --env-file=.env db/seed.mjs"
+    "db:seed": "node db/seed.mjs"
   },
   "engines": {
     "node": ">=18.18.0"
