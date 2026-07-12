@@ -132,6 +132,15 @@ export const adapter = {
   async findUserById(id) {
     return clone(db().users.find((u) => u.id === Number(id))) || null;
   },
+  async getUsers() {
+    return db().users.map(clone);
+  },
+  async updateUserPassword(id, passwordHash) {
+    const u = db().users.find((x) => x.id === Number(id));
+    if (!u) return null;
+    u.passwordHash = passwordHash;
+    return clone(u);
+  },
 
   // ---- orders (fleshed out in Phase 3) ----
   async getOrders() {

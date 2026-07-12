@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { getProducts, getCategories, getOrders } from "@/lib/store";
+import { getProducts, getCategories, getOrders, getUsers } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [products, categories, orders] = await Promise.all([
+  const [products, categories, orders, users] = await Promise.all([
     getProducts(),
     getCategories(),
     getOrders(),
+    getUsers(),
   ]);
 
   const pending = orders.filter((o) => o.status === "pending").length;
@@ -17,6 +18,7 @@ export default async function AdminDashboard() {
     { label: "Categories", value: categories.length, href: "/admin/categories" },
     { label: "Orders", value: orders.length, href: "/admin/orders" },
     { label: "Pending orders", value: pending, href: "/admin/orders" },
+    { label: "Users", value: users.length, href: "/admin/users" },
   ];
 
   return (

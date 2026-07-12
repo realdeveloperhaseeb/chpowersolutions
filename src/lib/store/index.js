@@ -44,6 +44,8 @@ export const updateSettings = (p) => pick().updateSettings(p);
 export const createUser = (d) => pick().createUser(d);
 export const findUserByEmail = (e) => pick().findUserByEmail(e);
 export const findUserById = (id) => pick().findUserById(id);
+export const getUsers = () => pick().getUsers();
+export const updateUserPassword = (id, hash) => pick().updateUserPassword(id, hash);
 
 // orders
 export const getOrders = () => pick().getOrders();

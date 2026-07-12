@@ -158,6 +158,13 @@ export const adapter = {
     const r = await q("SELECT * FROM users WHERE id = ? LIMIT 1", [id]);
     return r[0] ? mapUser(r[0]) : null;
   },
+  async getUsers() {
+    return (await q("SELECT * FROM users ORDER BY id DESC")).map(mapUser);
+  },
+  async updateUserPassword(id, passwordHash) {
+    await q("UPDATE users SET password_hash = ? WHERE id = ?", [passwordHash, id]);
+    return this.findUserById(id);
+  },
 
   // ---- orders ----
   async getOrders() {
