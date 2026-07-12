@@ -8,7 +8,9 @@ Backend (MySQL + auth + admin + orders) is added in later phases.
 
 ## Build status
 
-**Phase 1 — Frontend UI ✅** · **Phase 2 — Database + Auth + Admin ✅** · **Phase 3 — Checkout + Orders + Email ✅**
+**Phase 1 — Frontend UI ✅** · **Phase 2 — Database + Auth + Admin ✅** · **Phase 3 — Checkout + Orders + Email ✅** · **Phase 4 — Hostinger deploy guide ✅**
+
+> **Deploying?** See **[DEPLOY.md](DEPLOY.md)** for the full Hostinger Business walkthrough.
 
 Storefront: Home · About · Contact · Products (category filter) · Category pages ·
 Product detail (gallery, specs, add-to-cart) · Cart (`localStorage`) · Login/Register.
@@ -42,8 +44,8 @@ database (data resets on restart). The active mode is shown in the admin sidebar
 ### Default admin login (seed)
 
 ```
-email:    admin@chpowersolutions.com
-password: admin12345      (change after first login)
+email:    arslanarain1514@gmail.com
+password: 1514arslanarain      (change after first login)
 ```
 
 ## Getting started
@@ -80,9 +82,10 @@ src/
   lib/            # site.js (config), data.js (dummy products/categories)
 ```
 
-## Roadmap
+## Deployment
 
-- **Phase 4** — Hostinger Business deploy guide (Node.js app setup, env vars, MySQL, SMTP)
+Hostinger Business (Node.js app). Startup file is **`server.js`**; build with
+`npm run build`, seed with `npm run db:seed`. Full step-by-step: **[DEPLOY.md](DEPLOY.md)**.
 
 ## Payments (planned)
 

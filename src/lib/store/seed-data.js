@@ -154,13 +154,13 @@ export const seedSettings = {
   notify_email: "arslanarain1514@gmail.com",
   // Shown on the "forgot password" page for manual password reset requests.
   support_email: "arslanarain1514@gmail.com",
-  support_whatsapp: "+92 300 1234567",
+  support_whatsapp: "+92 317 4591992",
 };
 
 // Default admin (password is hashed by the seed script / memory store on boot).
 export const seedAdmin = {
   name: "Administrator",
-  email: "admin@chpowersolutions.com",
-  password: "admin12345", // change after first login
+  email: "arslanarain1514@gmail.com",
+  password: "1514arslanarain", // change after first login
   role: "admin",
 };
