@@ -155,6 +155,9 @@ export const seedSettings = {
   // Shown on the "forgot password" page for manual password reset requests.
   support_email: "arslanarain1514@gmail.com",
   support_whatsapp: "+92 317 4591992",
+  // No-SMTP email delivery: paste a free Web3Forms access key (created with the
+  // notify email) and order/enquiry notifications are delivered without any SMTP.
+  web3forms_key: "",
 };
 
 // Default admin (password is hashed by the seed script / memory store on boot).

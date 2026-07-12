@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendWeb3Forms } from "@/lib/web3forms";
 import { IconCheck, IconArrow } from "@/components/icons";
 
-export default function ContactForm() {
+// web3formsKey is passed from the (server) contact page so enquiries can be
+// delivered without SMTP. Falls back to the /api/contact (SMTP) route.
+export default function ContactForm({ web3formsKey = "" }) {
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -14,22 +17,33 @@ export default function ContactForm() {
     setBusy(true);
     setError("");
     const form = e.target;
-    const payload = {
+    const data = {
       name: form.name.value,
       phone: form.phone.value,
       email: form.email.value,
       message: form.message.value,
     };
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    setBusy(false);
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      return setError(data.error || "Could not send. Please try again.");
+
+    let ok = false;
+    if (web3formsKey) {
+      ok = await sendWeb3Forms({
+        key: web3formsKey,
+        subject: `New enquiry from ${data.name}`,
+        fromName: data.name,
+        replyTo: data.email,
+        message: `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n${data.message}`,
+      });
+    } else {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      ok = res.ok;
     }
+
+    setBusy(false);
+    if (!ok) return setError("Could not send. Please try again or contact us directly.");
     setSent(true);
     form.reset();
     setTimeout(() => setSent(false), 6000);

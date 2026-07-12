@@ -92,6 +92,23 @@ export default function AdminSettings() {
         ))}
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="font-bold text-slate-900">Email delivery — no SMTP needed</h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Paste a free <b>Web3Forms</b> access key and order &amp; enquiry emails are
+            delivered to your notify inbox — no mail server or password required.
+          </p>
+          <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-slate-600">
+            <li>Go to <a href="https://web3forms.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-600 hover:underline">web3forms.com</a> and enter your email (<b>{settings.notify_email || "your notify email"}</b>).</li>
+            <li>Check that inbox for the access key and paste it below.</li>
+          </ol>
+          <label className={`${label} mt-4`}>Web3Forms access key</label>
+          <input className={field} value={settings.web3forms_key || ""} onChange={set("web3forms_key")} placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+          <p className="mt-2 text-xs text-slate-400">
+            Delivers owner notifications. Customer confirmation emails need SMTP (optional).
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="mb-4 font-bold text-slate-900">Payment instructions</h2>
           <textarea rows={4} className={field} value={settings.payment_instructions || ""} onChange={set("payment_instructions")} />
           <label className="mt-4 flex items-center gap-2 text-sm font-medium text-slate-700">

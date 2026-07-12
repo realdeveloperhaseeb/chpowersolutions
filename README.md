@@ -26,11 +26,15 @@ Checkout (login-gated): delivery details · Bank transfer (with payment details 
 settings + screenshot upload) or Cash on delivery · server-validated totals · order
 confirmation. Customers track orders at `/orders`; admins accept/reject at `/admin/orders`.
 
-**Emails** (Nodemailer/SMTP): new-order + enquiry notifications go to `notify_email`
-(**arslanarain1514@gmail.com**, editable in Admin → Settings); customers get an order
-confirmation and status-change emails. Without SMTP configured, emails are skipped
-(logged) so dev still works. Contact details in the footer/contact page are editable
-from Admin → Settings.
+**Emails** — two paths:
+- **No SMTP (recommended):** paste a free **Web3Forms** access key in Admin → Settings.
+  New-order + enquiry notifications are delivered to your inbox from the browser — no
+  mail server. (Orders are always saved in Admin → Orders regardless.)
+- **SMTP (optional):** set `SMTP_*` env vars to also email customers (order received /
+  confirmed / rejected). Notify inbox = `notify_email` (**arslanarain1514@gmail.com**,
+  editable in Admin → Settings).
+
+Contact details in the footer/contact page are editable from Admin → Settings.
 
 Accent is the logo **red**; brand mark uses `public/logo.jpeg`.
 

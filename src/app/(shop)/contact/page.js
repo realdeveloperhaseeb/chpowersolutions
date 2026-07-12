@@ -1,6 +1,7 @@
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { getContactInfo } from "@/lib/settings";
+import { getSettings } from "@/lib/store";
 import { IconPhone, IconMail, IconPin } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +13,7 @@ export const metadata = {
 };
 
 export default async function ContactPage() {
-  const contact = await getContactInfo();
+  const [contact, settings] = await Promise.all([getContactInfo(), getSettings()]);
   const details = [
     { icon: IconPhone, label: "Phone", value: contact.phone, href: `tel:${contact.phone}` },
     { icon: IconMail, label: "Email", value: contact.email, href: `mailto:${contact.email}` },
@@ -69,7 +70,7 @@ export default async function ContactPage() {
 
         <div className="lg:col-span-3">
           <Reveal delay={0.1}>
-            <ContactForm />
+            <ContactForm web3formsKey={settings.web3forms_key || ""} />
           </Reveal>
         </div>
       </section>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/site";
+import { sendWeb3Forms } from "@/lib/web3forms";
 import { IconArrow, IconCheck } from "@/components/icons";
 
 const field =
@@ -67,8 +68,30 @@ export default function CheckoutPage() {
       }),
     });
     const data = await res.json();
+    if (!res.ok) {
+      setPlacing(false);
+      return setError(data.error || "Could not place order.");
+    }
+
+    // No-SMTP owner notification via Web3Forms (client-side), if a key is set.
+    if (settings.web3forms_key) {
+      const summary = items.map((i) => `${i.name} x${i.qty} = ${formatPrice(i.price * i.qty)}`).join("\n");
+      await sendWeb3Forms({
+        key: settings.web3forms_key,
+        subject: `New order #${data.order.id} — ${formatPrice(data.order.total)}`,
+        fromName: form.customerName,
+        replyTo: form.customerEmail,
+        message:
+          `New order #${data.order.id}\n\n` +
+          `Customer: ${form.customerName}\nPhone: ${form.customerPhone}\n` +
+          `Email: ${form.customerEmail || "—"}\nPayment: ${method === "bank" ? "Bank transfer" : "Cash on delivery"}\n` +
+          `Address: ${form.address}\n\n${summary}\n\nTotal: ${formatPrice(data.order.total)}\n` +
+          (screenshot ? `Payment screenshot: ${location.origin}${screenshot}\n` : "") +
+          `\nReview & confirm in the admin dashboard.`,
+      });
+    }
+
     setPlacing(false);
-    if (!res.ok) return setError(data.error || "Could not place order.");
     clear();
     router.push(`/checkout/success?order=${data.order.id}`);
   }

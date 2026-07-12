@@ -110,15 +110,32 @@ Your site should now load at your domain. 🎉
 
 ---
 
-## 6. Email (order & enquiry notifications)
-1. hPanel → **Emails → Email Accounts** → create e.g. `no-reply@yourdomain.com`.
-2. Use these SMTP settings (already in step 4):
-   - Host `smtp.hostinger.com`, Port `465` (SSL), User = the full email, Password = mailbox password.
-3. Notifications are delivered to the address in **Admin → Settings → notify_email**
-   (default **arslanarain1514@gmail.com**). Change it there anytime.
+## 6. Email notifications — two options
 
-Test: submit the contact form or place a test order — the enquiry/order email should
-arrive at the notify address, and the customer gets a confirmation.
+### Option A (recommended, **no SMTP**): Web3Forms
+Order & enquiry notifications delivered to your inbox with **no mail server, no
+password** — a free form-to-email relay that runs from the visitor's browser.
+
+1. Go to **[web3forms.com](https://web3forms.com/)**, enter **arslanarain1514@gmail.com**.
+2. Check that inbox for the **access key**.
+3. Log in to the site → **Admin → Settings → Email delivery** → paste the key → **Save**.
+
+Done. New orders and contact enquiries now email that inbox. (Every order is also
+always saved in **Admin → Orders**, so you never miss one even if an email fails.)
+
+### Option B (optional): SMTP (also enables customer confirmation emails)
+1. hPanel → **Emails → Email Accounts** → create e.g. `no-reply@yourdomain.com`.
+2. Set the `SMTP_*` env vars (step 4): host `smtp.hostinger.com`, port `465` (SSL),
+   user = full email, password = mailbox password.
+3. Notifications go to **Admin → Settings → notify_email** (default
+   **arslanarain1514@gmail.com**); customers also get order confirmation + status emails.
+
+> Web3Forms handles owner notifications without SMTP; SMTP additionally lets the
+> store email customers (order received / confirmed / rejected). You can use either
+> or both.
+
+Test: submit the contact form or place a test order — the email should arrive at the
+notify inbox.
 
 ---
 
