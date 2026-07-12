@@ -6,13 +6,33 @@ import { IconCheck, IconArrow } from "@/components/icons";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
-    // Phase 3: POST to /api/contact -> Nodemailer. For now, confirm in-UI.
+    setBusy(true);
+    setError("");
+    const form = e.target;
+    const payload = {
+      name: form.name.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    setBusy(false);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      return setError(data.error || "Could not send. Please try again.");
+    }
     setSent(true);
-    e.target.reset();
-    setTimeout(() => setSent(false), 5000);
+    form.reset();
+    setTimeout(() => setSent(false), 6000);
   }
 
   const field =
@@ -45,9 +65,11 @@ export default function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="btn-primary mt-6 w-full sm:w-auto">
-        Send Message <IconArrow />
+      <button type="submit" disabled={busy} className="btn-primary mt-6 w-full disabled:opacity-60 sm:w-auto">
+        {busy ? "Sending…" : "Send Message"} <IconArrow />
       </button>
+
+      {error && <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>}
 
       <AnimatePresence>
         {sent && (

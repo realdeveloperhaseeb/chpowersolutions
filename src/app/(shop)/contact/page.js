@@ -1,7 +1,9 @@
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import { site } from "@/lib/site";
+import { getContactInfo } from "@/lib/settings";
 import { IconPhone, IconMail, IconPin } from "@/components/icons";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Contact Us",
@@ -9,13 +11,13 @@ export const metadata = {
     "Get in touch with CH Power Solutions for solar inverter pricing, sizing advice and support. Call, email or send us a message.",
 };
 
-const details = [
-  { icon: IconPhone, label: "Phone", value: site.phone, href: `tel:${site.phone}` },
-  { icon: IconMail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-  { icon: IconPin, label: "Location", value: site.address, href: null },
-];
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contact = await getContactInfo();
+  const details = [
+    { icon: IconPhone, label: "Phone", value: contact.phone, href: `tel:${contact.phone}` },
+    { icon: IconMail, label: "Email", value: contact.email, href: `mailto:${contact.email}` },
+    { icon: IconPin, label: "Location", value: contact.address, href: null },
+  ];
   return (
     <>
       <section className="relative overflow-hidden border-b border-slate-100">

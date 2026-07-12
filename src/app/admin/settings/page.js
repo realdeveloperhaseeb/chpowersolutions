@@ -8,12 +8,21 @@ const label = "mb-1.5 block text-sm font-semibold text-slate-700";
 
 const groups = [
   {
-    title: "Store details",
+    title: "Store details (shown in footer & contact page)",
     fields: [
       ["site_name", "Store name"],
       ["site_email", "Contact email"],
       ["site_phone", "Contact phone"],
+      ["site_whatsapp", "WhatsApp number"],
       ["site_address", "Address"],
+    ],
+  },
+  {
+    title: "Notifications & support",
+    fields: [
+      ["notify_email", "Order/enquiry notifications go to"],
+      ["support_email", "Password-reset support email"],
+      ["support_whatsapp", "Password-reset support WhatsApp"],
     ],
   },
   {

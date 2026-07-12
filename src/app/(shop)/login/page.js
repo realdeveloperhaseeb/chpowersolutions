@@ -50,6 +50,12 @@ function LoginInner() {
             </button>
           </form>
 
+          <div className="mt-4 text-center">
+            <Link href="/forgot-password" className="text-sm font-semibold text-slate-500 hover:text-brand-600">
+              Forgot password?
+            </Link>
+          </div>
+
           <p className="mt-6 text-center text-sm text-slate-500">
             Don&apos;t have an account?{" "}
             <Link href="/register" className="font-semibold text-brand-600 hover:underline">Sign up</Link>

@@ -8,7 +8,7 @@ Backend (MySQL + auth + admin + orders) is added in later phases.
 
 ## Build status
 
-**Phase 1 — Frontend UI ✅** · **Phase 2 — Database + Auth + Admin ✅**
+**Phase 1 — Frontend UI ✅** · **Phase 2 — Database + Auth + Admin ✅** · **Phase 3 — Checkout + Orders + Email ✅**
 
 Storefront: Home · About · Contact · Products (category filter) · Category pages ·
 Product detail (gallery, specs, add-to-cart) · Cart (`localStorage`) · Login/Register.
@@ -18,6 +18,17 @@ Admin dashboard (`/admin`, admin-only): Dashboard · **Products CRUD** (image up
 specs, SEO meta) · **Categories CRUD** · **Settings** (bank details, site info) · Orders (Phase 3).
 
 Auth: bcrypt + JWT httpOnly cookie, `admin`/`user` roles, middleware-gated `/admin`.
+Forgot-password routes users to support email + WhatsApp (manual reset).
+
+Checkout (login-gated): delivery details · Bank transfer (with payment details from
+settings + screenshot upload) or Cash on delivery · server-validated totals · order
+confirmation. Customers track orders at `/orders`; admins accept/reject at `/admin/orders`.
+
+**Emails** (Nodemailer/SMTP): new-order + enquiry notifications go to `notify_email`
+(**arslanarain1514@gmail.com**, editable in Admin → Settings); customers get an order
+confirmation and status-change emails. Without SMTP configured, emails are skipped
+(logged) so dev still works. Contact details in the footer/contact page are editable
+from Admin → Settings.
 
 Accent is the logo **red**; brand mark uses `public/logo.jpeg`.
 
@@ -71,8 +82,7 @@ src/
 
 ## Roadmap
 
-- **Phase 3** — Cart → Checkout (login gate, delivery details, payment info, screenshot upload) → Orders + email notifications (Nodemailer). Order tables/APIs already scaffolded.
-- **Phase 4** — Hostinger Business deploy guide
+- **Phase 4** — Hostinger Business deploy guide (Node.js app setup, env vars, MySQL, SMTP)
 
 ## Payments (planned)
 

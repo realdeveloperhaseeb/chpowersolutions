@@ -60,6 +60,9 @@ export default function AccountMenu() {
             <p className="text-sm font-semibold text-slate-900">{user.name}</p>
             <p className="truncate text-xs text-slate-400">{user.email}</p>
           </div>
+          <Link href="/orders" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+            My orders
+          </Link>
           {user.role === "admin" && (
             <Link href="/admin" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
               Admin dashboard

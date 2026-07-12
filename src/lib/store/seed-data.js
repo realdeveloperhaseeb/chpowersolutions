@@ -141,6 +141,7 @@ export const seedSettings = {
   site_name: "CH Power Solutions",
   site_email: "sales@chpowersolutions.com",
   site_phone: "+92 300 1234567",
+  site_whatsapp: "+92 300 1234567",
   site_address: "Lahore, Pakistan",
   payment_bank_name: "Meezan Bank",
   payment_account_title: "CH Power Solutions",
@@ -149,6 +150,11 @@ export const seedSettings = {
   payment_instructions:
     "Transfer the total amount to the bank account above, then upload your payment screenshot at checkout. We confirm your order once payment is verified. Cash on Delivery is also available.",
   cod_enabled: "true",
+  // Where order & contact notifications are delivered (admin inbox).
+  notify_email: "arslanarain1514@gmail.com",
+  // Shown on the "forgot password" page for manual password reset requests.
+  support_email: "arslanarain1514@gmail.com",
+  support_whatsapp: "+92 300 1234567",
 };
 
 // Default admin (password is hashed by the seed script / memory store on boot).

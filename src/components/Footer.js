@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { getCategories } from "@/lib/store";
+import { getContactInfo } from "@/lib/settings";
 import Logo from "@/components/Logo";
 import { IconMail, IconPhone, IconPin } from "@/components/icons";
 
 export default async function Footer() {
-  const categories = await getCategories();
+  const [categories, contact] = await Promise.all([getCategories(), getContactInfo()]);
   return (
     <footer className="mt-24 border-t border-slate-100 bg-slate-50">
       <div className="container-x grid gap-10 py-14 md:grid-cols-4">
@@ -53,15 +54,15 @@ export default async function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-slate-600">
             <li className="flex items-center gap-2">
               <IconPhone className="text-brand-600" />
-              <a href={`tel:${site.phone}`} className="hover:text-brand-600">{site.phone}</a>
+              <a href={`tel:${contact.phone}`} className="hover:text-brand-600">{contact.phone}</a>
             </li>
             <li className="flex items-center gap-2">
               <IconMail className="text-brand-600" />
-              <a href={`mailto:${site.email}`} className="hover:text-brand-600">{site.email}</a>
+              <a href={`mailto:${contact.email}`} className="hover:text-brand-600">{contact.email}</a>
             </li>
             <li className="flex items-center gap-2">
               <IconPin className="text-brand-600" />
-              {site.address}
+              {contact.address}
             </li>
           </ul>
         </div>
@@ -69,7 +70,7 @@ export default async function Footer() {
 
       <div className="border-t border-slate-200">
         <div className="container-x flex flex-col items-center justify-between gap-2 py-5 text-xs text-slate-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {contact.name}. All rights reserved.</p>
           <p>Solar Inverters • Hybrid Systems • Power Circuits</p>
         </div>
       </div>

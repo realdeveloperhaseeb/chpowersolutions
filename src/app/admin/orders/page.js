@@ -52,19 +52,44 @@ export default function AdminOrders() {
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="font-bold text-slate-900">Order #{o.id} — {o.customerName}</p>
-                  <p className="text-sm text-slate-500">{o.customerPhone} · {o.paymentMethod}</p>
+                  <p className="text-sm text-slate-500">
+                    {o.customerPhone}{o.customerEmail ? ` · ${o.customerEmail}` : ""} · {o.paymentMethod}
+                  </p>
                 </div>
                 <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyles[o.status] || ""}`}>
                   {o.status}
                 </span>
               </div>
-              <p className="mt-2 font-extrabold text-slate-900">{formatPrice(o.total)}</p>
+
+              {o.address && <p className="mt-2 whitespace-pre-line text-sm text-slate-600"><b>Address:</b> {o.address}</p>}
+
+              <ul className="mt-3 space-y-1 text-sm text-slate-600">
+                {o.items?.map((i, idx) => (
+                  <li key={idx} className="flex justify-between">
+                    <span>{i.name} × {i.qty}</span>
+                    <span className="font-semibold text-slate-900">{formatPrice(i.price * i.qty)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+                <p className="font-extrabold text-slate-900">{formatPrice(o.total)}</p>
+                {o.paymentScreenshot && (
+                  <a href={o.paymentScreenshot} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand-600 hover:underline">
+                    View payment screenshot →
+                  </a>
+                )}
+              </div>
+
               <div className="mt-3 flex gap-2">
                 <button onClick={() => setStatus(o.id, "confirmed")} className="rounded-lg bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700 hover:bg-green-100">
                   Accept
                 </button>
                 <button onClick={() => setStatus(o.id, "rejected")} className="rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100">
                   Reject
+                </button>
+                <button onClick={() => setStatus(o.id, "completed")} className="rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-200">
+                  Mark completed
                 </button>
               </div>
             </div>
