@@ -5,5 +5,8 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const user = await getCurrentUser();
-  return NextResponse.json({ user });
+  return NextResponse.json(
+    { user },
+    { headers: { "Cache-Control": "no-store, max-age=0" } }
+  );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { IconUser } from "@/components/icons";
 
 export default function AccountMenu() {
@@ -10,13 +10,18 @@ export default function AccountMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const router = useRouter();
+  const pathname = usePathname();
 
+  // Re-check the session on every navigation (the header stays mounted across
+  // client-side routes, so a one-time check would miss login/logout).
   useEffect(() => {
-    fetch("/api/auth/me")
+    let active = true;
+    fetch("/api/auth/me", { cache: "no-store" })
       .then((r) => r.json())
-      .then((d) => setUser(d.user))
+      .then((d) => { if (active) setUser(d.user); })
       .catch(() => {});
-  }, []);
+    return () => { active = false; };
+  }, [pathname]);
 
   useEffect(() => {
     function onClick(e) {
