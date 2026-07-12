@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import { img } from "@/lib/store/seed-data";
 import { site } from "@/lib/site";
 import { IconArrow, IconCheck, IconBolt, IconShield, IconHeadset } from "@/components/icons";
 
@@ -52,8 +51,8 @@ export default function AboutPage() {
           <div className="relative overflow-hidden rounded-3xl border border-slate-100 shadow-card">
             <div className="relative aspect-[4/3]">
               <Image
-                src={img("about-story", 900, 700)}
-                alt="Solar power installation"
+                src="/images/about-solar.jpg"
+                alt="Solar panel installation team"
                 fill
                 sizes="(max-width:1024px) 100vw, 50vw"
                 className="object-cover"

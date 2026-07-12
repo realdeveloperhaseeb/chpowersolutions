@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { IconArrow, IconBolt, IconCheck } from "@/components/icons";
-import { img } from "@/lib/store/seed-data";
 
 const points = ["Up to 98.8% efficiency", "2–3 year warranty", "Nationwide delivery"];
 
@@ -29,7 +28,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+            className="mt-5 text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-slate-900 sm:text-6xl lg:text-[4.25rem]"
           >
             Reliable{" "}
             <span className="relative text-brand-600">
@@ -45,7 +44,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600"
+            className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600 sm:text-xl"
           >
             From 6kW home systems to 20kW industrial power — plus hybrid inverters
             and repair circuits. Clean energy, lower bills, uninterrupted power.
@@ -93,8 +92,8 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-card">
             <div className="relative aspect-[4/3]">
               <Image
-                src={img("hero-inverter", 900, 700)}
-                alt="Solar inverter"
+                src="/images/hero-solar.jpg"
+                alt="Rooftop solar power system"
                 fill
                 priority
                 sizes="(max-width:1024px) 100vw, 50vw"

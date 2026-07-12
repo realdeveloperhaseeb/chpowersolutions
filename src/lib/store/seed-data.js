@@ -15,7 +15,7 @@ export const seedCategories = [
     metaTitle: "Solar Inverters in Pakistan | 6kW–20kW Hybrid Inverters",
     metaDesc:
       "Buy reliable solar inverters online in Pakistan. On-grid & hybrid inverters 6kW to 20kW with MPPT, pure sine wave output and nationwide delivery.",
-    image: img("solar-inverters-cat"),
+    image: "/images/cat-solar-inverters.jpg",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const seedCategories = [
     metaTitle: "Hybrid Solar Inverters | Battery Backup Inverters Pakistan",
     metaDesc:
       "Shop hybrid solar inverters with battery backup. Seamless switching between solar, battery and grid. 6kW–15kW models in stock.",
-    image: img("hybrid-inverters-cat"),
+    image: "/images/cat-hybrid-inverters.jpg",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ export const seedCategories = [
     metaTitle: "Solar Inverter Circuit Boards | 3kW+ Control Cards",
     metaDesc:
       "Replacement solar inverter circuit boards and control cards from 3kW upwards. Genuine parts with warranty and fast shipping.",
-    image: img("inverter-circuits-cat"),
+    image: "/images/cat-inverter-circuits.jpg",
   },
 ];
 

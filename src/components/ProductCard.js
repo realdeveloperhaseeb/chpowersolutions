@@ -45,15 +45,15 @@ export default function ProductCard({ product, index = 0 }) {
 
       <div className="p-4">
         <Link href={`/products/${product.slug}`}>
-          <h3 className="line-clamp-1 font-bold text-slate-900 group-hover:text-brand-600">
+          <h3 className="line-clamp-1 text-[1.05rem] font-bold tracking-tight text-slate-900 group-hover:text-brand-600">
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 line-clamp-2 text-sm text-slate-500">{product.shortDesc}</p>
+        <p className="mt-1 line-clamp-2 text-[0.9rem] text-slate-500">{product.shortDesc}</p>
 
         <div className="mt-3 flex items-end justify-between">
           <div>
-            <span className="text-lg font-extrabold text-slate-900">
+            <span className="text-xl font-extrabold tracking-tight text-slate-900">
               {formatPrice(product.price)}
             </span>
             {product.oldPrice && (

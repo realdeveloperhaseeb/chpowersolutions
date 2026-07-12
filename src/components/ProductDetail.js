@@ -77,7 +77,7 @@ export default function ProductDetail({ product }) {
           {product.categorySlug.replace(/-/g, " ")}
         </Link>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="mt-4 text-[2rem] font-extrabold tracking-[-0.03em] text-slate-900 sm:text-[2.5rem]">
           {product.name}
         </h1>
 

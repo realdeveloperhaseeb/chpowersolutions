@@ -19,6 +19,19 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
+  font-size: 1.03125rem; /* ~16.5px base for a less thin, more substantial feel */
+  line-height: 1.65;
+  letter-spacing: -0.011em;
+}
+
+/* Editorial heading treatment: heavier weight + tight tracking so titles read
+   as designed, not default. */
+@layer base {
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    line-height: 1.12;
+  }
 }
 
 @layer components {
@@ -27,7 +40,7 @@ body {
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.97];
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-bold tracking-tight transition-all duration-200 active:scale-[0.97];
   }
   .btn-primary {
     @apply btn bg-brand-600 text-white shadow-soft hover:bg-brand-700 hover:shadow-lg;
@@ -44,11 +57,15 @@ body {
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700;
+    @apply inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-700;
   }
 
   .section-title {
-    @apply text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl;
+    @apply text-[2.1rem] font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-[2.75rem];
+  }
+
+  .lead {
+    @apply text-lg leading-relaxed text-slate-600 sm:text-xl;
   }
 
   .link-underline {

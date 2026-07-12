@@ -8,11 +8,11 @@ export default function PageHeader({ eyebrow, title, subtitle }) {
       <div className="container-x relative py-14 text-center">
         <Reveal>
           {eyebrow && <span className="chip">{eyebrow}</span>}
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mx-auto mt-4 max-w-3xl text-[2.4rem] font-extrabold tracking-[-0.03em] text-slate-900 sm:text-5xl">
             {title}
           </h1>
           {subtitle && (
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">{subtitle}</p>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">{subtitle}</p>
           )}
         </Reveal>
       </div>

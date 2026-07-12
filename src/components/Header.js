@@ -30,7 +30,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
           <Logo size={40} />
-          <span className="hidden text-lg font-extrabold tracking-tight text-slate-900 sm:inline">
+          <span className="hidden text-xl font-extrabold tracking-tight text-slate-900 sm:inline">
             CH <span className="text-brand-600">Power</span>
           </span>
         </Link>
@@ -41,7 +41,7 @@ export default function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className={`link-underline text-sm font-semibold transition-colors ${
+              className={`link-underline text-[0.95rem] font-semibold tracking-tight transition-colors ${
                 isActive(n.href) ? "text-brand-600" : "text-slate-700 hover:text-brand-600"
               }`}
             >
