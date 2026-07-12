@@ -9,6 +9,7 @@
     "start:server": "node server.js",
     "db:seed": "node db/seed.mjs"
   },
+  "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=18.18.0"
   },
