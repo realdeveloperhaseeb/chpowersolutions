@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
@@ -16,6 +16,12 @@ export default function Header({ categories = [] }) {
   const pathname = usePathname();
   const router = useRouter();
   const { count } = useCart();
+
+  // Lock body scroll while the slide-in menu is open.
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -139,32 +145,59 @@ export default function Header({ categories = [] }) {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile slide-in menu */}
       <AnimatePresence>
         {open && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-b border-slate-100 bg-white md:hidden"
-          >
-            <div className="container-x flex flex-col py-3">
-              {nav.map((n) => (
-                <Link
-                  key={n.href}
-                  href={n.href}
+          <div className="md:hidden">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-[60] bg-slate-900/50"
+            />
+            {/* Panel */}
+            <motion.nav
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.28, ease: "easeOut" }}
+              className="fixed right-0 top-0 z-[70] flex h-full w-[82%] max-w-xs flex-col bg-white shadow-2xl"
+            >
+              <div className="flex items-center justify-between border-b border-slate-100 p-4">
+                <Logo size={36} />
+                <button
                   onClick={() => setOpen(false)}
-                  className={`rounded-lg px-3 py-2.5 text-sm font-semibold ${
-                    isActive(n.href)
-                      ? "bg-brand-50 text-brand-700"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
+                  className="grid h-9 w-9 place-items-center rounded-full text-slate-600 hover:bg-slate-100"
+                  aria-label="Close menu"
                 >
-                  {n.label}
-                </Link>
-              ))}
-            </div>
-          </motion.nav>
+                  <IconClose />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-3">
+                {nav.map((n) => (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setOpen(false)}
+                    className={`block rounded-lg px-3 py-3 text-sm font-semibold ${
+                      isActive(n.href)
+                        ? "bg-brand-50 text-brand-700"
+                        : "text-slate-700 hover:bg-slate-50"
+                    }`}
+                  >
+                    {n.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="border-t border-slate-100 p-4">
+                <a href={`tel:${site.phone}`} className="flex items-center gap-2 text-sm font-bold text-brand-600">
+                  <IconPhone className="h-4 w-4" /> {site.phone}
+                </a>
+              </div>
+            </motion.nav>
+          </div>
         )}
       </AnimatePresence>
     </header>
