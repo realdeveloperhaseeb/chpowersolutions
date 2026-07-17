@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Hero from "@/components/Hero";
+import HeroSlider from "@/components/HeroSlider";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import ProductRow from "@/components/ProductRow";
@@ -62,7 +62,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HeroSlider />
 
       {/* Trending searches */}
       <section className="border-b border-slate-100 bg-slate-50">
