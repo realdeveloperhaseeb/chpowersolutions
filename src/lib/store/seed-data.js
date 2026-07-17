@@ -136,12 +136,23 @@ export const seedProducts = [
   },
 ];
 
+// Use the curated local images for every product (grouped by category) until real
+// product photos are uploaded from the admin. Overrides the placeholders above.
+const PRODUCT_IMAGES = {
+  "solar-inverters": ["/images/cat-solar-inverters.jpg", "/images/hero-solar.jpg", "/images/banner-solar-field.jpg"],
+  "hybrid-inverters": ["/images/cat-hybrid-inverters.jpg", "/images/cat-solar-inverters.jpg", "/images/hero-solar.jpg"],
+  "inverter-circuits": ["/images/cat-inverter-circuits.jpg", "/images/promo-circuit.jpg", "/images/cat-inverter-circuits.jpg"],
+};
+for (const p of seedProducts) {
+  p.images = PRODUCT_IMAGES[p.categorySlug] || p.images;
+}
+
 // Store settings (editable from admin). Payment: Bank transfer + Cash on delivery.
 export const seedSettings = {
   site_name: "CH Power Solutions",
   site_email: "sales@chpowersolutions.com",
-  site_phone: "+92 300 1234567",
-  site_whatsapp: "+92 300 1234567",
+  site_phone: "+92 317 4591992",
+  site_whatsapp: "+92 317 4591992",
   site_address: "Lahore, Pakistan",
   payment_bank_name: "Meezan Bank",
   payment_account_title: "CH Power Solutions",
