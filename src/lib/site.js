@@ -3,7 +3,7 @@ export const site = {
   name: "CH Power Solutions",
   short: "CH Power",
   // Small quality tagline shown under the wordmark (edit freely).
-  slogan: "[ name of quality ]",
+  slogan: "name of quality",
   tagline: "Solar Inverters & Power Solutions",
   description:
     "CH Power Solutions supplies high-efficiency solar inverters, hybrid inverters and power circuits — 6kW to 20kW and beyond. Reliable energy solutions with nationwide delivery.",
