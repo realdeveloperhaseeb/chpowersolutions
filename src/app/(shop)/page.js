@@ -3,10 +3,14 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
-import { getCategories, getFeaturedProducts } from "@/lib/store";
+import ProductRow from "@/components/ProductRow";
+import {
+  getCategories,
+  getFeaturedProducts,
+  getProducts,
+  getProductsByCategory,
+} from "@/lib/store";
 import { site } from "@/lib/site";
-
-export const dynamic = "force-dynamic";
 import {
   IconArrow,
   IconBolt,
@@ -14,6 +18,10 @@ import {
   IconTruck,
   IconHeadset,
 } from "@/components/icons";
+
+export const dynamic = "force-dynamic";
+
+const trending = ["6kW Inverter", "10kW Inverter", "Hybrid", "20kW", "Circuit Board", "Solar"];
 
 const features = [
   { icon: IconBolt, title: "High Efficiency", text: "Up to 98.8% conversion so you get more usable power from every panel." },
@@ -34,35 +42,46 @@ export const metadata = {
   description: site.description,
 };
 
+const discountPct = (p) => (p.oldPrice > p.price ? (p.oldPrice - p.price) / p.oldPrice : 0);
+
 export default async function HomePage() {
-  const [categories, featured] = await Promise.all([
+  const [categories, featured, allProducts] = await Promise.all([
     getCategories(),
     getFeaturedProducts(),
+    getProducts(),
   ]);
+
+  const deals = allProducts
+    .filter((p) => p.oldPrice > p.price)
+    .sort((a, b) => discountPct(b) - discountPct(a))
+    .slice(0, 8);
+
+  const categoryRows = await Promise.all(
+    categories.map(async (c) => ({ category: c, products: await getProductsByCategory(c.slug) }))
+  );
 
   return (
     <>
       <Hero />
 
-      {/* Features */}
-      <section className="container-x py-16">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((f, i) => (
-            <Reveal key={f.title} delay={i * 0.08}>
-              <div className="card h-full p-6 transition-all hover:-translate-y-1 hover:shadow-soft">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
-                  <f.icon />
-                </span>
-                <h3 className="mt-4 font-bold text-slate-900">{f.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-500">{f.text}</p>
-              </div>
-            </Reveal>
+      {/* Trending searches */}
+      <section className="border-b border-slate-100 bg-slate-50">
+        <div className="container-x flex flex-wrap items-center gap-2 py-3">
+          <span className="text-sm font-bold text-slate-700">Trending:</span>
+          {trending.map((t) => (
+            <Link
+              key={t}
+              href={`/products?q=${encodeURIComponent(t)}`}
+              className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600 transition-colors hover:border-brand-300 hover:text-brand-600"
+            >
+              {t}
+            </Link>
           ))}
         </div>
       </section>
 
       {/* Categories */}
-      <section className="container-x py-8">
+      <section className="container-x py-12">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="chip">Shop by category</span>
           <h2 className="section-title mt-4">Find the right power solution</h2>
@@ -104,8 +123,18 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Hot deals carousel */}
+      <div className="border-y border-slate-100 bg-white">
+        <ProductRow
+          title="🔥 Hot Deals"
+          subtitle="Biggest savings this week"
+          href="/products"
+          products={deals}
+        />
+      </div>
+
       {/* Featured products */}
-      <section className="container-x py-16">
+      <section className="container-x py-12">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <span className="chip">Best sellers</span>
@@ -119,6 +148,36 @@ export default async function HomePage() {
         <div className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
           {featured.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
+          ))}
+        </div>
+      </section>
+
+      {/* Per-category product rows */}
+      {categoryRows.map(({ category, products }) => (
+        <ProductRow
+          key={category.slug}
+          title={category.name}
+          subtitle={category.tagline}
+          href={`/category/${category.slug}`}
+          products={products}
+        />
+      ))}
+
+      {/* Trust band */}
+      <section className="border-t border-slate-100 bg-slate-50">
+        <div className="container-x grid gap-5 py-12 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((f, i) => (
+            <Reveal key={f.title} delay={i * 0.08}>
+              <div className="flex items-start gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-brand-600 shadow-sm">
+                  <f.icon />
+                </span>
+                <div>
+                  <h3 className="font-bold text-slate-900">{f.title}</h3>
+                  <p className="mt-0.5 text-sm leading-relaxed text-slate-500">{f.text}</p>
+                </div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>

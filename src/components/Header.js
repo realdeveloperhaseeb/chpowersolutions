@@ -71,14 +71,14 @@ export default function Header({ categories = [] }) {
       {/* Main row */}
       <div className="border-b border-slate-100 bg-white/90 backdrop-blur-md">
         <div className="container-x flex h-16 items-center gap-4">
-          {/* Logo + title + slogan */}
+          {/* Logo + title + slogan (always visible) */}
           <Link href="/" className="flex shrink-0 items-center gap-2.5">
             <Logo size={44} />
-            <span className="hidden leading-none sm:block">
-              <span className="block text-[1.15rem] font-extrabold uppercase tracking-tight text-slate-900">
+            <span className="block leading-none">
+              <span className="block text-[0.82rem] font-extrabold uppercase leading-tight tracking-tight text-slate-900 sm:text-[1.15rem]">
                 CH <span className="text-brand-600">Power Solutions</span>
               </span>
-              <span className="mt-1 block text-[0.6rem] font-bold uppercase tracking-[0.2em] text-slate-400">
+              <span className="mt-1 block text-[0.5rem] font-bold uppercase tracking-[0.16em] text-slate-400 sm:text-[0.6rem]">
                 {site.slogan}
               </span>
             </span>
