@@ -5,6 +5,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { site } from "@/lib/site";
 import Logo from "@/components/Logo";
 import AccountMenu from "@/components/AccountMenu";
 import { IconCart, IconMenu, IconClose } from "@/components/icons";
@@ -29,9 +30,14 @@ export default function Header() {
       <div className="container-x flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
-          <Logo size={40} />
-          <span className="hidden text-xl font-extrabold tracking-tight text-slate-900 sm:inline">
-            CH <span className="text-brand-600">Power</span>
+          <Logo size={44} />
+          <span className="hidden leading-none sm:block">
+            <span className="block text-[1.15rem] font-extrabold uppercase tracking-tight text-slate-900">
+              CH <span className="text-brand-600">Power Solutions</span>
+            </span>
+            <span className="mt-1 block text-[0.6rem] font-bold uppercase tracking-[0.2em] text-slate-400">
+              {site.slogan}
+            </span>
           </span>
         </Link>
 

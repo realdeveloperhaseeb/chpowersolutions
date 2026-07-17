@@ -5,14 +5,14 @@ import { site } from "@/lib/site";
 export default function Logo({ className = "", size = 44 }) {
   return (
     <span
-      className={`relative inline-block overflow-hidden rounded-xl ring-1 ring-slate-200 ${className}`}
-      style={{ width: size * 1.85, height: size }}
+      className={`relative inline-block overflow-hidden rounded-full ring-1 ring-slate-200 ${className}`}
+      style={{ width: size, height: size }}
     >
       <Image
         src="/logo.jpeg"
         alt={site.name}
         fill
-        sizes="120px"
+        sizes="96px"
         className="object-cover"
         priority
       />
