@@ -41,6 +41,42 @@ export const seedCategories = [
       "Replacement solar inverter circuit boards and control cards from 3kW upwards. Genuine parts with warranty and fast shipping.",
     image: "/images/cat-inverter-circuits.jpg",
   },
+  {
+    id: 4,
+    name: "Solar Panels",
+    slug: "solar-panels",
+    tagline: "Mono & bifacial PV modules",
+    description:
+      "High-efficiency mono-crystalline and bifacial solar panels from 350W to 585W — tier-1 quality for rooftop and ground-mount systems.",
+    metaTitle: "Solar Panels in Pakistan | 350W–585W Mono & Bifacial",
+    metaDesc:
+      "Buy tier-1 solar panels online in Pakistan. Mono-crystalline & bifacial modules 350W to 585W with high efficiency and long warranty.",
+    image: "/images/cat-solar-panels.jpg",
+  },
+  {
+    id: 5,
+    name: "Lithium Batteries",
+    slug: "lithium-batteries",
+    tagline: "LiFePO4 storage batteries",
+    description:
+      "Long-life LiFePO4 lithium batteries for solar storage and backup — 48V wall-mount and rack modules from 5kWh to 10kWh.",
+    metaTitle: "Lithium Batteries for Solar | LiFePO4 48V Storage Pakistan",
+    metaDesc:
+      "Shop LiFePO4 lithium batteries for solar storage in Pakistan. 48V, 5kWh–10kWh, long cycle life with BMS protection.",
+    image: "/images/cat-lithium-batteries.jpg",
+  },
+  {
+    id: 6,
+    name: "Breakers & Distribution",
+    slug: "breakers-distribution",
+    tagline: "MCBs, DBs & surge protection",
+    description:
+      "AC/DC circuit breakers, solar distribution boxes and surge protection devices (SPDs) to keep your solar system safe and compliant.",
+    metaTitle: "Circuit Breakers, Distribution Boxes & SPDs | Solar Protection",
+    metaDesc:
+      "Buy AC/DC circuit breakers, solar distribution boxes and surge protection devices online in Pakistan. Genuine electrical protection parts.",
+    image: "/images/cat-breakers.jpg",
+  },
 ];
 
 export const seedProducts = [
@@ -134,6 +170,112 @@ export const seedProducts = [
     metaDesc: "Genuine 5kW solar inverter circuit board, tested and ready to install. New control card with warranty. Buy online in Pakistan.",
     images: [img("5kwc-1"), img("5kwc-2"), img("5kwc-3")],
   },
+
+  // ---- Solar Panels (category 4) ----
+  {
+    id: 10, name: "550W Mono Solar Panel", slug: "550w-mono-solar-panel", categoryId: 4,
+    categorySlug: "solar-panels", price: 18500, oldPrice: 21000, stock: 40, featured: true,
+    shortDesc: "Tier-1 550W mono-crystalline half-cut solar panel with high efficiency and PID resistance.",
+    description: "The 550W Mono Solar Panel uses half-cut mono-crystalline cells for excellent performance in real-world conditions. Anti-PID, salt-mist and ammonia resistant, it's built to deliver reliable output for 25+ years on rooftop and ground-mount systems.",
+    specs: { "Power": "550W", "Cell Type": "Mono PERC Half-Cut", "Efficiency": "21.3%", "Voltage (Vmp)": "41.8V", "Frame": "Anodised Aluminium", "Warranty": "12 yr product / 25 yr performance" },
+    metaTitle: "550W Mono Solar Panel Price in Pakistan | Tier-1 Half-Cut",
+    metaDesc: "Buy 550W mono-crystalline half-cut solar panel in Pakistan. 21.3% efficiency, anti-PID, 25-year performance warranty. Best price online.",
+    images: [],
+  },
+  {
+    id: 11, name: "450W Solar Panel", slug: "450w-solar-panel", categoryId: 4,
+    categorySlug: "solar-panels", price: 15000, oldPrice: 17500, stock: 55, featured: false,
+    shortDesc: "Efficient 450W mono solar panel — a great fit for residential rooftop arrays.",
+    description: "The 450W Solar Panel balances size and output for home solar systems. Its mono-crystalline cells and durable tempered-glass build make it a dependable choice for lowering your electricity bills.",
+    specs: { "Power": "450W", "Cell Type": "Mono PERC", "Efficiency": "20.7%", "Voltage (Vmp)": "34.2V", "Frame": "Anodised Aluminium", "Warranty": "12 yr product / 25 yr performance" },
+    metaTitle: "450W Solar Panel Price in Pakistan | Mono Crystalline",
+    metaDesc: "450W mono solar panel for home rooftop systems. High efficiency, tempered glass, 25-year warranty. Order online in Pakistan.",
+    images: [],
+  },
+  {
+    id: 12, name: "585W Bifacial Solar Panel", slug: "585w-bifacial-solar-panel", categoryId: 4,
+    categorySlug: "solar-panels", price: 24000, oldPrice: 27500, stock: 25, featured: true,
+    shortDesc: "585W bifacial panel that harvests light from both sides for up to 20% more energy.",
+    description: "The 585W Bifacial Solar Panel captures reflected light on its rear side, boosting yield on bright ground and rooftop installs. Dual-glass construction gives it superior durability and a longer service life.",
+    specs: { "Power": "585W", "Cell Type": "Bifacial Mono", "Bifaciality": "Up to +20%", "Efficiency": "22.5%", "Build": "Dual Glass", "Warranty": "15 yr product / 30 yr performance" },
+    metaTitle: "585W Bifacial Solar Panel Price in Pakistan | Dual Glass",
+    metaDesc: "585W bifacial dual-glass solar panel with up to 20% extra yield. 22.5% efficiency, 30-year performance warranty. Buy online in Pakistan.",
+    images: [],
+  },
+
+  // ---- Lithium Batteries (category 5) ----
+  {
+    id: 13, name: "5kWh Lithium Battery (48V)", slug: "5kwh-lithium-battery", categoryId: 5,
+    categorySlug: "lithium-batteries", price: 345000, oldPrice: 390000, stock: 14, featured: true,
+    shortDesc: "48V 5kWh wall-mount LiFePO4 battery with built-in BMS and long cycle life.",
+    description: "The 5kWh Lithium Battery stores your solar energy for use at night or during load-shedding. LiFePO4 chemistry and an intelligent BMS deliver 6000+ cycles, safe operation and a compact wall-mount design.",
+    specs: { "Capacity": "5.12kWh", "Voltage": "48V (51.2V)", "Chemistry": "LiFePO4", "Cycles": "6000+ @ 80% DoD", "Comms": "RS485 / CAN", "Warranty": "5 Years" },
+    metaTitle: "5kWh Lithium Battery Price in Pakistan | 48V LiFePO4",
+    metaDesc: "48V 5kWh LiFePO4 lithium battery for solar storage. 6000+ cycles, built-in BMS, wall-mount. Best price in Pakistan with warranty.",
+    images: [],
+  },
+  {
+    id: 14, name: "10kWh Lithium Battery (48V)", slug: "10kwh-lithium-battery", categoryId: 5,
+    categorySlug: "lithium-batteries", price: 650000, oldPrice: 720000, stock: 8, featured: false,
+    shortDesc: "High-capacity 48V 10kWh LiFePO4 battery for whole-home backup and storage.",
+    description: "The 10kWh Lithium Battery gives large homes and businesses ample overnight storage. Stackable and parallel-ready, it scales with your energy needs while its BMS keeps every cell safe and balanced.",
+    specs: { "Capacity": "10.24kWh", "Voltage": "48V (51.2V)", "Chemistry": "LiFePO4", "Cycles": "6000+ @ 80% DoD", "Comms": "RS485 / CAN", "Warranty": "5 Years" },
+    metaTitle: "10kWh Lithium Battery Price in Pakistan | 48V LiFePO4",
+    metaDesc: "48V 10kWh LiFePO4 lithium battery for whole-home solar backup. Stackable, 6000+ cycles, BMS. Order online in Pakistan.",
+    images: [],
+  },
+  {
+    id: 15, name: "48V 100Ah LiFePO4 Battery", slug: "48v-100ah-lifepo4-battery", categoryId: 5,
+    categorySlug: "lithium-batteries", price: 185000, oldPrice: 210000, stock: 20, featured: false,
+    shortDesc: "Rack-mount 48V 100Ah LiFePO4 module — reliable storage for solar and UPS.",
+    description: "The 48V 100Ah LiFePO4 Battery is a versatile rack-mount storage module for solar and backup systems. With a robust BMS and stable chemistry, it delivers dependable power cycle after cycle.",
+    specs: { "Capacity": "5.12kWh (100Ah)", "Voltage": "48V (51.2V)", "Chemistry": "LiFePO4", "Form Factor": "Rack Mount", "Cycles": "6000+", "Warranty": "5 Years" },
+    metaTitle: "48V 100Ah LiFePO4 Battery Price in Pakistan | Rack Mount",
+    metaDesc: "48V 100Ah LiFePO4 rack-mount lithium battery for solar & UPS. 6000+ cycles, integrated BMS. Buy online in Pakistan.",
+    images: [],
+  },
+
+  // ---- Breakers & Distribution (category 6) ----
+  {
+    id: 16, name: "DC Circuit Breaker 2P", slug: "dc-circuit-breaker-2p", categoryId: 6,
+    categorySlug: "breakers-distribution", price: 1800, oldPrice: 2300, stock: 120, featured: false,
+    shortDesc: "2-pole DC MCB for solar arrays — safe isolation and overload protection.",
+    description: "The DC Circuit Breaker 2P protects your PV strings from overload and short circuit, and provides safe manual isolation for maintenance. Rated for solar DC voltages with reliable trip performance.",
+    specs: { "Type": "DC MCB", "Poles": "2P", "Rated Current": "63A", "Voltage": "500V DC", "Breaking Capacity": "6kA", "Warranty": "1 Year" },
+    metaTitle: "DC Circuit Breaker 2P Price in Pakistan | Solar MCB 500V",
+    metaDesc: "2-pole DC circuit breaker (MCB) for solar arrays. 63A, 500V DC, 6kA breaking capacity. Genuine solar protection part.",
+    images: [],
+  },
+  {
+    id: 17, name: "AC Circuit Breaker 63A", slug: "ac-circuit-breaker-63a", categoryId: 6,
+    categorySlug: "breakers-distribution", price: 1200, oldPrice: 1500, stock: 150, featured: false,
+    shortDesc: "63A AC MCB for inverter output and main distribution boards.",
+    description: "The AC Circuit Breaker 63A provides overload and short-circuit protection on the AC side of your solar system. Built to standard DIN-rail mounting for easy installation in any distribution board.",
+    specs: { "Type": "AC MCB", "Poles": "2P", "Rated Current": "63A", "Voltage": "230/400V AC", "Breaking Capacity": "6kA", "Warranty": "1 Year" },
+    metaTitle: "AC Circuit Breaker 63A Price in Pakistan | MCB DIN Rail",
+    metaDesc: "63A AC circuit breaker (MCB) for inverter output and distribution boards. 6kA breaking capacity, DIN-rail mount. Buy online in Pakistan.",
+    images: [],
+  },
+  {
+    id: 18, name: "Solar Distribution Box", slug: "solar-distribution-box", categoryId: 6,
+    categorySlug: "breakers-distribution", price: 8500, oldPrice: 10500, stock: 35, featured: true,
+    shortDesc: "Pre-wired AC/DC combiner box with breakers and SPD for solar systems.",
+    description: "The Solar Distribution Box combines DC and AC protection in one weatherproof enclosure — pre-wired with breakers and surge protection to keep your installation safe, tidy and compliant.",
+    specs: { "Enclosure": "IP65 Weatherproof", "Includes": "DC MCB + AC MCB + SPD", "Config": "1 in / 1 out", "Mounting": "Wall", "Warranty": "1 Year" },
+    metaTitle: "Solar Distribution Box Price in Pakistan | AC/DC Combiner",
+    metaDesc: "Pre-wired solar distribution/combiner box with breakers and surge protection. IP65 weatherproof. Best price in Pakistan.",
+    images: [],
+  },
+  {
+    id: 19, name: "Surge Protection Device (SPD)", slug: "surge-protection-device-spd", categoryId: 6,
+    categorySlug: "breakers-distribution", price: 3500, oldPrice: 4200, stock: 60, featured: false,
+    shortDesc: "Type 2 SPD to protect inverters and appliances from voltage spikes and lightning surges.",
+    description: "The Surge Protection Device (SPD) guards your inverter and connected appliances against damaging voltage spikes and induced lightning surges. A must-have for protecting your solar investment.",
+    specs: { "Type": "Type 2 SPD", "Poles": "2P", "Max Voltage": "385V", "Discharge Current": "40kA", "Response": "<25ns", "Warranty": "1 Year" },
+    metaTitle: "Surge Protection Device (SPD) Price in Pakistan | Type 2",
+    metaDesc: "Type 2 surge protection device (SPD) for solar systems. 40kA discharge, protects inverters & appliances. Buy online in Pakistan.",
+    images: [],
+  },
 ];
 
 // Use the curated local images for every product (grouped by category) until real
@@ -142,6 +284,9 @@ const PRODUCT_IMAGES = {
   "solar-inverters": ["/images/cat-solar-inverters.jpg", "/images/hero-solar.jpg", "/images/banner-solar-field.jpg"],
   "hybrid-inverters": ["/images/cat-hybrid-inverters.jpg", "/images/cat-solar-inverters.jpg", "/images/hero-solar.jpg"],
   "inverter-circuits": ["/images/cat-inverter-circuits.jpg", "/images/promo-circuit.jpg", "/images/cat-inverter-circuits.jpg"],
+  "solar-panels": ["/images/cat-solar-panels.jpg", "/images/banner-solar-field.jpg", "/images/hero-solar.jpg"],
+  "lithium-batteries": ["/images/cat-lithium-batteries.jpg", "/images/promo-circuit.jpg", "/images/cat-lithium-batteries.jpg"],
+  "breakers-distribution": ["/images/cat-breakers.jpg", "/images/promo-circuit.jpg", "/images/cat-inverter-circuits.jpg"],
 };
 for (const p of seedProducts) {
   p.images = PRODUCT_IMAGES[p.categorySlug] || p.images;
