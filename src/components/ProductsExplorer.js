@@ -4,16 +4,22 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 
-// Client-side category filter over the passed product list.
-export default function ProductsExplorer({ products, categories }) {
+// Client-side category filter + search over the passed product list.
+export default function ProductsExplorer({ products, categories, query = "" }) {
   const [active, setActive] = useState("all");
 
   const filters = [{ slug: "all", name: "All" }, ...categories.map((c) => ({ slug: c.slug, name: c.name }))];
 
-  const visible = useMemo(
-    () => (active === "all" ? products : products.filter((p) => p.categorySlug === active)),
-    [active, products]
-  );
+  const q = query.trim().toLowerCase();
+  const visible = useMemo(() => {
+    let list = active === "all" ? products : products.filter((p) => p.categorySlug === active);
+    if (q) {
+      list = list.filter((p) =>
+        `${p.name} ${p.shortDesc || ""} ${p.description || ""}`.toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [active, products, q]);
 
   return (
     <div>
@@ -50,7 +56,9 @@ export default function ProductsExplorer({ products, categories }) {
       </div>
 
       {visible.length === 0 && (
-        <p className="mt-12 text-center text-slate-500">No products in this category yet.</p>
+        <p className="mt-12 text-center text-slate-500">
+          {q ? `No products match “${query}”.` : "No products in this category yet."}
+        </p>
       )}
     </div>
   );

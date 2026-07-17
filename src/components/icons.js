@@ -100,6 +100,13 @@ export const IconUser = (p) => (
   </svg>
 );
 
+export const IconSearch = (p) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" {...base} {...p}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="M21 21l-4.3-4.3" />
+  </svg>
+);
+
 export const IconTrash = (p) => (
   <svg viewBox="0 0 24 24" width="18" height="18" {...base} {...p}>
     <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" />
